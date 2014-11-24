@@ -1,0 +1,9 @@
+<div>
+  <% render @post.categories %>
+  <!--if no user for post, show 'anonymous'-->
+  <%= render 'shared/content_title', title: @post.title, author: (@post.creator.username rescue 'anonymous') %>
+</div>
+
+<hr/>
+<%= @post.description %>
+<hr/>
