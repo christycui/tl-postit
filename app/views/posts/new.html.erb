@@ -1,28 +1,4 @@
 
 <%= render 'shared/content_title', title: 'Create a New Post' %>
 
-<% if @post.errors.any? %>
-  <div class="alert alert-danger">
-    <ul style="list-style: none;">
-      <% @post.errors.full_messages.each do |msg| %>
-      
-       <li><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span><%= msg %></span>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= form_for @post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :url %>
-  <%= f.text_field :url %>
-
-  <%= f.label :description %>
-  <%= f.text_area :description %>
-
-  <br/>
-  <%= f.submit "Create post!", class: 'btn btn-primary' %>
-<% end %>
+<%= render 'form' %>

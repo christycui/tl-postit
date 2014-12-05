@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update]
+
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -13,10 +14,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.creator = User.first # change once we add authentication
 
     if @post.save
       flash[:notice] = "Your post is created."
-      redirect_to post_path(post)
+      redirect_to post_path(@post) 
     else
       render 'new'
     end
@@ -26,11 +28,22 @@ class PostsController < ApplicationController
   end
 
   def update
+
+    if @post.update(post_params)
+      flash[:notice] = "Your post is updated."
+      redirect_to post_path(@post)
+    else
+      render 'edit'
+    end
   end
 
   private
   def post_params
     params.require(:post).permit!
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 
 end
