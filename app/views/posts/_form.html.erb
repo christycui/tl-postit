@@ -1,15 +1,4 @@
-
-<% if @post.errors.any? %>
-  <div class="alert alert-danger">
-    <ul style="list-style: none;">
-      <% @post.errors.full_messages.each do |msg| %>
-      
-       <li><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span><%= msg %></span>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render 'shared/display_errors', obj: @post %>
 
 <div class='well'>
   <%= form_for @post do |f| %>
