@@ -7,5 +7,25 @@
 
 <%= @post.description %>
 <hr/>
-<small float='right'>[<%= link_to "edit this post", edit_post_path(@post) %>]</small>
-<small float='right'>[<%= link_to "back to index", posts_path %>]</small>
+<p align='right'>
+  <small float='right'>[<%= link_to "edit this post", edit_post_path(@post) %>]</small>
+  <small float='right'>[<%= link_to "back to All Posts", posts_path %>]</small>
+</p>
+
+
+<%= render 'shared/display_errors', obj: @comment %>
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.label :body, 'Leave a Comment' %>
+  <%= f.text_area :body, rows: 3, class: 'span4' %>
+  <br/>
+  <%= f.submit(class: 'btn btn-primary')%>
+<% end %>
+
+<h4> Comments: </h4>
+<% @post.comments.each do |comment| %>
+  <div class='well span8'>
+    <p><%= comment.body %></p>
+    <br/>
+    <p>by <%= comment.creator.username rescue 'anonymous' %> at <%= comment.created_at %></p>
+  </div>
+<% end %>
