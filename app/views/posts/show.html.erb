@@ -7,7 +7,7 @@
 
 <%= @post.description %>
 <hr/>
-<%= "<p align='left'><small>Posted on #{format_time(@post.created_at)} // Last updated on #{format_time(@post.updated_at)}</small></p>" %>
+<%= <p align='left'><small>Posted on #{format_time(@post.created_at)} // Last updated on #{format_time(@post.updated_at)}</small></p> %>
 <p align='right'>
   <small float='right'>[<%= link_to "edit this post", edit_post_path(@post) %>]</small>
   <small float='right'>[<%= link_to "back to All Posts", posts_path %>]</small>
