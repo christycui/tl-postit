@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
+  before_action :require_user
+  
   def create
     @comment = Comment.new(comment_params)
-    @comment.creator = User.first # change after authentication
+    @comment.creator = current_user
     @post = Post.find(params[:post_id])
     @comment.post = @post
     if @comment.save

@@ -13,8 +13,8 @@ class SessionsController < ApplicationController
       flash[:notice] = 'You are logged in successfully!'
       redirect_to root_path
     else
-      flash[:notice] = 'There is something wrong with your username and password.'
-      redirect_to register_path
+      flash.now[:notice] = 'There is something wrong with your username and password. Try again or register <a href="/register">here</a>'.html_safe
+      render 'new'
     end
   end
 
