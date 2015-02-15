@@ -15,7 +15,8 @@
  @import "bootstrap";
 
  .container {
-  margin-left: 135px
+  margin-left: 135px;
+  margin-right: 135px;
 }
 
 .navbar .nav > li > a.brand {
@@ -29,6 +30,13 @@
 div.nav_item {
   margin-left: 25px;
   float: left;
+  clear: both;
+}
+
+#logout{
+  a{
+  color: black;
+  }
 }
 
 .label  {
