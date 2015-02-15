@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       # save user id not user because cookie has size limit
       session[:user_id] = user.id
-      flash[:notice] = 'You are logged in successfully!'
+      flash[:notice] = 'You are now logged in.'
       redirect_to root_path
     else
       flash.now[:notice] = 'There is something wrong with your username and password. Try again or register <a href="/register">here</a>'.html_safe

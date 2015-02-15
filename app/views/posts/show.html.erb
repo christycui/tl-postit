@@ -26,10 +26,4 @@
 <% end %>
 
 <h4> Comments: </h4>
-<% @post.comments.each do |comment| %>
-  <div class='well span8'>
-    <p><%= comment.body %></p>
-    <br/>
-    <p>by <%= comment.creator.username rescue 'anonymous' %> on <%= format_time(comment.created_at) %></p>
-  </div>
-<% end %>
+<%= render @post.comments %>
