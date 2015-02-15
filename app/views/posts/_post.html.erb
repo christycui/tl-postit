@@ -1,22 +1,41 @@
-
-
-<div class='panel panel-default'>
-  <div class='panel-heading'>
-    <div class='panel-title'>
-      <h3><%= link_to post.title, post_path(post) %>
-        <% if logged_in? %>
-          <small>[<%= link_to "edit", edit_post_path(post) %>]</small>
+<div class='container-fluid'>
+  <% if logged_in? %>
+    <div class='col-sm-1'>
+      <div class='span0 well text-center'>
+        <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+        <span class="glyphicon glyphicon-chevron-up"></span>
         <% end %>
-      </h3>
+        <br/>
+        <%= post.total_votes %>
+        <br/>
+        <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <% end %>
+      </div>
     </div>
-    <%= render post.categories %>
-  </div>
-  <div class='panel-body'>
-    <p><%= post.description %></p>
-    <!--display post related info-->
-    <p class='quiet'>Posted by <%= post.creator.username rescue 'anonymous' %> on <%= format_time(post.created_at) %></p>
-    <!--edit and display number of comments-->
-    <p><%= link_to "#{post.comments.size} " + "#{post.comments.size <= 1 ? 'comment' : 'comments'}", post_path(post)%></p>
+  <% end %>
+
+  <div class='col-sm-11'>
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <div class='panel-title'>
+          <h3><%= link_to post.title, post_path(post) %>
+            <% if logged_in? %>
+            <small>[<%= link_to "edit", edit_post_path(post) %>]</small>
+            <% end %>
+          </h3>
+        </div>
+        <%= render post.categories %>
+      </div>
+      <div class='panel-body'>
+        <p><%= post.description %></p>
+        <!--display post related info-->
+        <p class='quiet'>Posted by <%= post.creator.username rescue 'anonymous' %> on <%= format_time(post.created_at) %></p>
+        <!--edit and display number of comments-->
+        <p><%= link_to "#{post.comments.size} " + "#{post.comments.size <= 1 ? 'comment' : 'comments'}", post_path(post)%></p>
+      </div>
+    </div>
   </div>
 </div>
+
 
