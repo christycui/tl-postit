@@ -1,10 +1,34 @@
 <% show_post ||= false %>
 
-<div class='well span8'>
-  <em><%= comment.body %></em>
-  <% if show_post %>
+
+<div class='row'>
+
+  <div class='span0 well text-center'>
+    <% if logged_in? %>
+    <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    <% end %>
+    <% else %>
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    <% end %>
+    <br/>
+    <%= comment.total_votes %>
+    <br/>
+    <% if logged_in? %>
+    <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+    <span class="glyphicon glyphicon-chevron-down"></span>
+    <% end %>
+    <% else %>
+    <span class="glyphicon glyphicon-chevron-down"></span>
+    <% end %>
+  </div>
+
+  <div class='well span8'>
+    <em><%= comment.body %></em>
+    <% if show_post %>
     on <%= link_to comment.post.title, post_path(comment.post) %>
-  <% end %>
-  <br/>
-  <p>by <%= comment.creator.username rescue 'anonymous' %> on <%= format_time(comment.created_at) %></p>
+    <% end %>
+    <br/>
+    <p>by <%= comment.creator.username rescue 'anonymous' %> on <%= format_time(comment.created_at) %></p>
+  </div>
 </div>
