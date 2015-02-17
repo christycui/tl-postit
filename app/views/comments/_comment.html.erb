@@ -2,7 +2,6 @@
 
 
 <div class='row'>
-
   <div class='span0 well text-center'>
     <% if logged_in? %>
     <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
@@ -29,6 +28,6 @@
     on <%= link_to comment.post.title, post_path(comment.post) %>
     <% end %>
     <br/>
-    <p>by <%= comment.creator.username rescue 'anonymous' %> on <%= format_time(comment.created_at) %></p>
+    <p>by <%= link_to comment.creator.username, user_path(comment.creator) %> on <%= format_time(comment.created_at) %></p>
   </div>
 </div>

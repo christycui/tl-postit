@@ -20,8 +20,15 @@ Recent activities:
       <% @user.posts.each do |post| %>
         <%= render 'posts/post', post: post %>
       <% end %>
+      <% if @user.posts.size == 0 %>
+        <em><%= @user.username %> has not posted anything yet.</em>
+      <% end %>
     </div>
     <div role="tabpanel" class="tab-pane fade" id="comments">
       <%= render @user.comments, show_post: true %>
+      <% if @user.comments.size == 0 %>
+        <em>No comments.</em>
+      <% end %>
     </div>
+
   </div>

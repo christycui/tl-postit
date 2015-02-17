@@ -30,7 +30,7 @@
         <div class='panel-heading'>
           <div class='panel-title'>
             <h3><%= link_to post.title, post_path(post) %>
-              <% if logged_in? %>
+              <% if logged_in? && current_user = post.creator %>
               <small>[<%= link_to "edit", edit_post_path(post) %>]</small>
               <% end %>
             </h3>
@@ -40,7 +40,7 @@
         <div class='panel-body'>
           <p><%= post.description %></p>
           <!--display post related info-->
-          <p class='quiet'>Posted by <%= post.creator.username rescue 'anonymous' %> on <%= format_time(post.created_at) %></p>
+          <p class='quiet'>Posted by <%= link_to post.creator.username, user_path(post.creator) %> on <%= format_time(post.created_at) %></p>
           <!--edit and display number of comments-->
           <p><%= link_to "#{post.comments.size} " + "#{post.comments.size <= 1 ? 'comment' : 'comments'}", post_path(post)%></p>
         </div>

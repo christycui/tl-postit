@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:show, :index, :vote]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by{|x| x.total_votes}.reverse
   end
 
   def show
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     if @vote.valid?
       flash[:notice] = "Your vote is counted."
     else
-      flash[:notice] = "You have already voted."
+      flash[:error] = "You have already voted."
     end
 
     redirect_to :back
