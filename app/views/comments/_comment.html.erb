@@ -3,20 +3,20 @@
 
 <div class='row'>
   <div class='span0 well text-center'>
-    <% if logged_in? %>
-    <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
-    <span class="glyphicon glyphicon-chevron-up"></span>
-    <% end %>
+        <% if logged_in? %>
+        <%= link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true do %>
+        <span class="glyphicon glyphicon-chevron-up"></span>
+        <% end %>
     <% else %>
     <span class="glyphicon glyphicon-chevron-up"></span>
     <% end %>
     <br/>
-    <%= comment.total_votes %>
+        <span id='comment_<%= comment.id %>_vote'><%= comment.total_votes %></span>
     <br/>
     <% if logged_in? %>
-    <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
-    <span class="glyphicon glyphicon-chevron-down"></span>
-    <% end %>
+        <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true do %>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+        <% end %>
     <% else %>
     <span class="glyphicon glyphicon-chevron-down"></span>
     <% end %>

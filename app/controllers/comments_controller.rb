@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.creator = current_user
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by slug: params[:post_id]
     @comment.post = @post
     if @comment.save
       flash[:notice] = 'New comment added!'
@@ -16,16 +16,21 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by slug: params[:post_id]
     @comment = @post.comments.find(params[:id])
     @vote = Vote.create(user: current_user, vote: params[:vote], votable: @comment)
+    respond_to do |format|
+      format.html do
+        if @vote.valid?
+          flash[:notice] = "Your vote is counted."
+        else
+          flash[:error] = "You've already voted."
+        end
+        redirect_to :back
+      end
+      format.js
 
-    if @vote.valid?
-      flash[:notice] = "Your vote is counted."
-    else
-      flash[:error] = "You've already voted."
     end
-    redirect_to :back
   end
 
   private

@@ -4,21 +4,21 @@
     <div class='col-sm-1'>
       <div class='span0 well text-center'>
         <% if logged_in? %>
-        <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
-        <span class="glyphicon glyphicon-chevron-up"></span>
-        <% end %>
+          <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
+            <span class="glyphicon glyphicon-chevron-up"></span>
+          <% end %>
         <% else %>
-        <span class="glyphicon glyphicon-chevron-up"></span>
+          <span class="glyphicon glyphicon-chevron-up"></span>
         <% end %>
         <br/>
-        <%= post.total_votes %>
+        <span id='post_<%= post.slug %>_vote'><%= post.total_votes %></span>
         <br/>
         <% if logged_in? %>
-        <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
-        <span class="glyphicon glyphicon-chevron-down"></span>
-        <% end %>
+          <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+          <% end %>
         <% else %>
-        <span class="glyphicon glyphicon-chevron-down"></span>
+          <span class="glyphicon glyphicon-chevron-down"></span>
         <% end %>
       </div>
     </div>
