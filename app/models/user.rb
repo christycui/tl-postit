@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum:6}, on: :create
 
   sluggable_column :username
+
+  def admin?
+    self.role == 'admin'
+  end
 end

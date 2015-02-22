@@ -2,6 +2,7 @@ module Sluggable
   extend ActiveSupport::Concern
   included do
     before_save :generate_slug
+    class_attribute :slug_col
   end
 
   def generate_slug
@@ -17,7 +18,7 @@ module Sluggable
   end
 
   def to_slug(name)
-    str = title.strip
+    str = self.send(self.class.slug_col.to_sym).strip
     str.gsub! /\s*[^A-Za-z0-9]\s*/, '-'
     str.gsub! /-+/, '-'
     str.downcase
@@ -37,7 +38,7 @@ module Sluggable
 
   module ClassMethods
     def sluggable_column(col_name)
-      slug_col = col_name
+      self.slug_col = col_name
     end
   end
 end
