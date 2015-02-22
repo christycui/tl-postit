@@ -8,7 +8,7 @@ class Category < ActiveRecord::Base
 
 
   def generate_slug
-    the_slug = to_slug(self.title)
+    the_slug = to_slug(self.name)
     cate = Category.find_by slug: the_slug
     count = 1
     while cate && cate != self

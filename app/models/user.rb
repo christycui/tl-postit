@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
 
   def generate_slug
-    the_slug = to_slug(self.title)
+    the_slug = to_slug(self.username)
     user = User.find_by slug: the_slug
     count = 1
     while user && user != self
